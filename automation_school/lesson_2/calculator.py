@@ -35,7 +35,7 @@ while True:
         if operation != 'close':
             if operation not in ['+', '-', '*', '/']:
                 print('Пожалуйста, введите знак операции из инструкции.')
-                break
+                continue
             if operation == '+':
                 print(f'Сумма чисел {a} и {b} равна {a + b}')
                 break
