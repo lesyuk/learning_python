@@ -1,3 +1,2 @@
 x = float(input())
-k = int(x)
-print(x % 10)
+print((x % 10) * 10)

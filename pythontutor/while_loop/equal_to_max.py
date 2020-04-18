@@ -6,5 +6,4 @@ while n != 0:
         i = n
     l += [n]
     n = int(input())
-
 print(l.count(i))
