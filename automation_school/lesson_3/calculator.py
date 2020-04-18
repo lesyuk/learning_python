@@ -1,3 +1,32 @@
+def number_input():
+    number = input('Введите число: ')
+    if type(number_validation(number)) == float:
+        return number_validation(number)
+
+
+def number_validation(number):
+    if number != 'close':
+        try:
+            return float(number)
+        except ValueError:
+            print('Не похоже на число. Попробуйте еще раз.')
+            number_input()
+    else:
+        exit()
+
+
+def operation_sign_input_and_validation():
+    sign = input('Введите знак операции: ')
+    if sign != 'close':
+        if sign in ['+', '-', '*', '/']:
+            return sign
+        else:
+            print('Неверный знак операции. Попробуйте еще раз.')
+            return operation_sign_input_and_validation()
+    else:
+        exit()
+
+
 def amount(a, b):
     return f'Сумма чисел {a} и {b} равна {a + b}'
 
@@ -22,69 +51,22 @@ print('Добро пожаловать в калькулятор. Доступн
       '-\n'
       '*\n'
       '/\n'
+      'На вход программе подается два числа и знак операции.\n'
       'Для выхода из программы введите команду "close" без кавычек.')
 
 while True:
-    while True:
-        a = input('Введите первое число: ')
-        if a != 'close':
-            try:
-                a = int(a)
-                break
-            except ValueError:
-                print('Не похоже на число. Попробуйте еще раз.')
-                continue
-        else:
-            exit()
-
-    while True:
-        b = input('Введите второе число: ')
-        if b != 'close':
-            try:
-                b = int(b)
-                break
-            except ValueError:
-                print('Не похоже на число. Попробуйте еще раз.')
-                continue
-        else:
-            exit()
-
-    while True:
-        operation = input('Введите знак операции: ')
-        if operation != 'close':
-            if operation not in ['+', '-', '*', '/']:
-                print('Неверный знак операции. Попробуйте еще раз.')
-                continue
-            if operation == '+':
-                print(amount(a, b))
-                break
-            elif operation == '-':
-                print(difference(a, b))
-                break
-            elif operation == '*':
-                print(multiplication(a, b))
-                break
-            elif operation == '/':
-                print(division(a, b))
-                if division(a, b) == 'Делить на ноль нельзя!':
-                    print('Чтобы начать ввод заново введите команду "new" без кавычек.\n'
-                          'Для смены знака операции введите команду "retry" без кавычек.\n'
-                          'Для выхода из программы введите команду "close" без кавычек.')
-                    while True:
-                        command = input()
-                        if command == 'new':
-                            break
-                        elif command == 'retry':
-                            break
-                        elif command == 'close':
-                            exit()
-                        else:
-                            print('Неверная команда. Попробуйте еще раз.')
-                            continue
-                    if command == 'retry':
-                        continue
-                    else:
-                        break
-        else:
-            exit()
-    continue
+    a = number_input()
+    b = number_input()
+    operation_sign = operation_sign_input_and_validation()
+    if operation_sign == '+':
+        print(amount(a, b))
+        continue
+    elif operation_sign == '-':
+        print(difference(a, b))
+        continue
+    elif operation_sign == '*':
+        print(multiplication(a, b))
+        continue
+    elif operation_sign == '/':
+        print(division(a, b))
+        continue
