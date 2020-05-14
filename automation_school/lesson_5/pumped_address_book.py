@@ -1,3 +1,17 @@
+import pickle
+import time
+dump_file = '/Users/paul/Documents/address_book.txt'
+
+
+def work_time(func_to_decorate):
+    """Calculates function run time"""
+    def wrapper(*args):
+        start_time = time.time()
+        func_to_decorate(*args)
+        print(f'Время выполнения операции: {time.time() - start_time}\n')
+    return wrapper
+
+
 class AddressBook:
     def __init__(self):
         self.entry = {}
@@ -23,9 +37,25 @@ class AddressBook:
                 print(f'{k}: {v}')
             print()
 
+    @work_time
+    def write(self):
+        """Writing book data to a file"""
+        f = open(dump_file, 'wb')
+        pickle.dump(self.entry, f)
+        f.close()
+
+    @work_time
+    def read(self):
+        """Writing data to a book from a file"""
+        f = open(dump_file, 'rb')
+        self.entry.update(pickle.load(f))
+
 
 address_book = AddressBook()
 address_book.add_entry('Павел', 'Лесюк', 'paul.lesyuk@gmail.com', '+79777097967', 'Циан')
 address_book.show_entry()
+address_book.write()
 address_book.delete_entry('+79777097967')
+address_book.show_entry()
+address_book.read()
 address_book.show_entry()
