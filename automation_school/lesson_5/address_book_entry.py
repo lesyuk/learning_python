@@ -38,10 +38,8 @@ class BookEntry(AddressBook):
 # AddressBook work example
 if __name__ == '__main__':
     entry = BookEntry()
-    entry.add_entry('1', 'Павел', 'Лесюк', 'test@test.com', '+79989999999', 'Рога и Копыта')
+    entry.add_entry('1', 'Test', 'Testovich', 'test@test.com', '+79989999999', 'Roga i Kopita')
     entry.show_entries()
     entry.write()
     entry.delete_entry('1')
-    entry.show_entries()
-    entry.read()
-    entry.show_entries()
+    print(entry.book == True)
